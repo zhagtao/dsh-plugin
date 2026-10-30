@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Command Code 套餐用量",
+    "description": "在右下角显示 Command Code GOAT 套餐的额度、5 小时与每周滚动限额。"
+  },
+  "widget": {
+    "fiveHour": "5 小时",
+    "weekly": "每周",
+    "plan": "套餐",
+    "status": "状态",
+    "monthlyCredits": "月度额度",
+    "extraCredits": "额外额度",
+    "usageLimits": "滚动限额",
+    "renews": "续费",
+    "left": "剩余",
+    "of": "共",
+    "updated": "{time} 更新",
+    "resetsIn": "{time} 后重置",
+    "resetting": "正在重置",
+    "retry": "重试",
+    "refresh": "刷新用量",
+    "openStudio": "打开 Studio",
+    "collapse": "收起用量卡片",
+    "expand": "展开用量卡片",
+    "limited": "已达限额",
+    "active": "生效中",
+    "inactive": "未生效",
+    "loading": "正在读取用量…",
+    "errorMissingKey": "请先在「设置 → 模型」中配置 COMMAND_CODE_API_KEY，然后重试。",
+    "errorInvalidKey": "Command Code 拒绝了该 API Key。",
+    "errorRateLimited": "Command Code 正在限流，请稍后重试。",
+    "errorNetwork": "无法连接 Command Code。",
+    "errorTimeout": "Command Code 响应超时。",
+    "errorUpstream": "Command Code 返回了无法解析的数据。",
+    "partial": "订阅详情暂不可用。"
+  }
+}

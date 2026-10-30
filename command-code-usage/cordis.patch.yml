@@ -1,0 +1,3 @@
+- insert:
+    - id: command-code-usage
+      name: 'dsh-command-code-usage'

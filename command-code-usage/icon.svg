@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Command Code GOAT usage">
+  <defs>
+    <linearGradient id="ccu-bg" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#252B3D"/>
+      <stop offset="1" stop-color="#151824"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#ccu-bg)"/>
+  <path d="M22 23c-3.8-5.2-9-5.4-11.6-2.2 2 6.2 6.4 9.5 11.9 10" fill="none" stroke="#F4B860" stroke-width="4" stroke-linecap="round"/>
+  <path d="M42 23c3.8-5.2 9-5.4 11.6-2.2-2 6.2-6.4 9.5-11.9 10" fill="none" stroke="#F4B860" stroke-width="4" stroke-linecap="round"/>
+  <path d="M18.5 25.5c0 15.1 5.7 24.5 13.5 24.5s13.5-9.4 13.5-24.5c0-5.3-5.9-8.8-13.5-8.8s-13.5 3.5-13.5 8.8Z" fill="#F5F0E6"/>
+  <path d="M18.5 25.5c0 15.1 5.7 24.5 13.5 24.5s13.5-9.4 13.5-24.5c0-5.3-5.9-8.8-13.5-8.8s-13.5 3.5-13.5 8.8Z" fill="none" stroke="#151824" stroke-width="2.4" stroke-linejoin="round"/>
+  <circle cx="26" cy="30.5" r="2.1" fill="#151824"/>
+  <circle cx="38" cy="30.5" r="2.1" fill="#151824"/>
+  <path d="M32 39v8.5" fill="none" stroke="#151824" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M28.5 41.5 32 45l3.5-3.5" fill="none" stroke="#151824" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

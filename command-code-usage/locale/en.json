@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "title": "Command Code Usage",
+    "description": "Shows GOAT plan credits and rolling 5-hour and weekly usage in the bottom-right corner."
+  },
+  "widget": {
+    "fiveHour": "5h",
+    "weekly": "Week",
+    "plan": "Plan",
+    "status": "Status",
+    "monthlyCredits": "Monthly credits",
+    "extraCredits": "Extra credits",
+    "usageLimits": "Rolling limits",
+    "renews": "Renews",
+    "left": "left",
+    "of": "of",
+    "updated": "Updated {time}",
+    "resetsIn": "resets in {time}",
+    "resetting": "resetting now",
+    "retry": "Retry",
+    "refresh": "Refresh usage",
+    "openStudio": "Open Studio",
+    "collapse": "Collapse usage card",
+    "expand": "Expand usage card",
+    "limited": "Limit reached",
+    "active": "active",
+    "inactive": "inactive",
+    "loading": "Reading usage…",
+    "errorMissingKey": "Add COMMAND_CODE_API_KEY in Settings → Models, then retry.",
+    "errorInvalidKey": "Command Code rejected the API key.",
+    "errorRateLimited": "Command Code is rate limiting requests. Try again shortly.",
+    "errorNetwork": "Could not reach Command Code.",
+    "errorTimeout": "Command Code did not answer in time.",
+    "errorUpstream": "Command Code returned an unusable response.",
+    "partial": "Subscription details unavailable."
+  }
+}
