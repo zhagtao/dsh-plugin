@@ -36,7 +36,7 @@ git clone https://github.com/zhagtao/dsh-plugin.git
 
 - 根目录只保留集合级文件，例如本 README、`.gitignore`。
 - 每个插件一个独立子目录，目录内包含自己的 `package.json`、`cordis.patch.yml`、Host/Client 代码、locale 与测试。
-- 插件目录名与其 bundle 名称保持一致，便于按 `#path:/<目录>` 安装。
+- 插件目录名与 `cordis.patch.yml` 中的行 id 对应，便于按 `#path:/<目录>` 安装。
 
 ## 隐私
 
