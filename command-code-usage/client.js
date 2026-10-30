@@ -28,6 +28,15 @@ window.__ModuleLoader__.load({
       en: {
         'widget.title': 'Command Code',
         'widget.remainingUsage': 'Remaining usage',
+        'widget.checkUpdate': 'Check for updates',
+        'widget.checkingUpdate': 'Checking…',
+        'widget.updateAvailable': 'Update available',
+        'widget.updatePlugin': 'Update plugin',
+        'widget.updatingPlugin': 'Updating…',
+        'widget.updateCurrent': 'Plugin is up to date.',
+        'widget.updateDone': 'Update complete. Refresh or restart DSH if needed.',
+        'widget.updateFailed': 'Update unavailable. Use the Plugins page to update.',
+        'widget.updateLocal': 'Local installation: update the source directory manually.',
         'widget.menuLabel': 'Command Code usage',
         'widget.fiveHour': '5h',
         'widget.weekly': 'Week',
@@ -64,6 +73,15 @@ window.__ModuleLoader__.load({
       zh: {
         'widget.title': 'Command Code',
         'widget.remainingUsage': '剩余用量',
+        'widget.checkUpdate': '检查插件更新',
+        'widget.checkingUpdate': '检查中…',
+        'widget.updateAvailable': '发现新版本',
+        'widget.updatePlugin': '更新插件',
+        'widget.updatingPlugin': '更新中…',
+        'widget.updateCurrent': '插件已是最新版本。',
+        'widget.updateDone': '更新完成，请按需刷新页面或重启 DSH。',
+        'widget.updateFailed': '更新不可用，请在插件页面更新。',
+        'widget.updateLocal': '本地安装请手动更新源目录。',
         'widget.menuLabel': 'Command Code 用量',
         'widget.fiveHour': '5 小时',
         'widget.weekly': '每周',
@@ -100,18 +118,15 @@ window.__ModuleLoader__.load({
     }
 
     const CSS = `
-.ccu-menu{display:flex;flex-direction:column;box-sizing:border-box;min-width:0;max-width:calc(100vw - 24px);max-height:min(46vh,380px);margin:0 0 4px;padding:9px 10px 8px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;border-bottom:1px solid var(--dsw-alias-separator-primary);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:12px;line-height:1.45;text-align:left}
+.ccu-menu{display:flex;flex-direction:column;box-sizing:border-box;min-width:0;max-width:calc(100vw - 24px);max-height:min(46vh,380px);margin:0;padding:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;color:var(--dsw-alias-label-primary);font-family:inherit;font-size:12px;line-height:1.45;text-align:left}
 .ccu-menu > *{flex:none}
-.ccu-head{display:flex;align-items:center;gap:7px;min-width:0;width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.ccu-head{display:flex;align-items:center;gap:8px;min-width:0;width:100%;min-height:34px;padding:7px 12px;border:0;border-radius:6px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.ccu-head:hover{background:var(--dsw-alias-interactive-bg-hover)}
 .ccu-head:focus-visible{outline:2px solid var(--dsw-alias-label-primary-bluish);outline-offset:2px}
 .ccu-content[hidden]{display:none}
-.ccu-mark{flex:none;display:block;color:var(--dsw-alias-label-primary-bluish)}
-.ccu-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;font-weight:650;letter-spacing:.01em}
-.ccu-plan{min-width:0;max-width:92px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:1px 6px;border:1px solid color-mix(in srgb,var(--dsw-alias-label-primary-bluish) 32%,transparent);border-radius:999px;color:var(--dsw-alias-label-primary-bluish);font-size:10px;font-weight:600;letter-spacing:.02em}
-.ccu-dot{flex:none;width:6px;height:6px;border-radius:50%;background:var(--dsw-alias-label-tertiary)}
-.ccu-dot[data-tone=active]{background:var(--dsw-alias-state-business-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--dsw-alias-state-business-primary) 18%,transparent)}
-.ccu-dot[data-tone=warn]{background:var(--dsw-alias-state-warn-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--dsw-alias-state-warn-primary) 18%,transparent)}
-.ccu-dot[data-tone=error]{background:var(--dsw-alias-state-error-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--dsw-alias-state-error-primary) 18%,transparent)}
+.ccu-content{padding:0 12px 10px}
+.ccu-mark{flex:none;display:block;color:inherit}
+.ccu-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;font-weight:400}
 .ccu-toggle{display:inline-flex;flex:none;align-items:center;justify-content:center;width:22px;height:22px;margin-left:auto;padding:0;border:0;border-radius:6px;background:transparent;color:var(--dsw-alias-label-tertiary);font:inherit;cursor:pointer}
 .ccu-toggle:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
 .ccu-toggle:focus-visible,.ccu-action:focus-visible{outline:2px solid var(--dsw-alias-label-primary-bluish);outline-offset:1px}
@@ -151,7 +166,7 @@ window.__ModuleLoader__.load({
 .ccu-skeleton{height:4px;border-radius:999px;background:linear-gradient(90deg,var(--dsw-alias-border-l2),var(--dsw-alias-border-l1),var(--dsw-alias-border-l2));background-size:200% 100%;animation:ccu-shimmer 1.4s ease-in-out infinite}
 .ccu-skeleton-wide{width:100%}.ccu-skeleton-mid{width:72%}
 @keyframes ccu-shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
-@media (max-width:480px){.ccu-menu{padding:8px}.ccu-meter-label{width:32px}.ccu-pct{width:30px}.ccu-reset{margin-left:39px}}
+@media (max-width:480px){.ccu-meter-label{width:32px}.ccu-pct{width:30px}.ccu-reset{margin-left:39px}}
 @media (max-height:560px){.ccu-menu{max-height:38vh}}
 @media (prefers-reduced-motion:reduce){.ccu-fill,.ccu-chevron{transition:none}.ccu-skeleton{animation:none}}
 `
@@ -372,53 +387,12 @@ window.__ModuleLoader__.load({
       }
     }
 
-    function GoatMark({ size = 18 }) {
-      return h(
-        'svg',
-        {
-          className: 'ccu-mark',
-          viewBox: '0 0 32 32',
-          width: size,
-          height: size,
-          'aria-hidden': true,
-          focusable: 'false',
-        },
-        h('path', {
-          d: 'M11 10.5C9.4 7.9 6.8 6.4 4.2 7.2c1 3.2 3.1 5.2 6.2 5.7',
-          fill: 'none',
-          stroke: 'currentColor',
-          strokeWidth: 2,
-          strokeLinecap: 'round',
-        }),
-        h('path', {
-          d: 'M21 10.5c1.6-2.6 4.2-4.1 6.8-3.3-1 3.2-3.1 5.2-6.2 5.7',
-          fill: 'none',
-          stroke: 'currentColor',
-          strokeWidth: 2,
-          strokeLinecap: 'round',
-        }),
-        h('path', {
-          d: 'M10.4 12.1c0 7.3 2.5 11.7 5.6 11.7s5.6-4.4 5.6-11.7c0-2.5-2.5-4.1-5.6-4.1s-5.6 1.6-5.6 4.1Z',
-          fill: 'currentColor',
-          opacity: 0.16,
-        }),
-        h('path', {
-          d: 'M10.4 12.1c0 7.3 2.5 11.7 5.6 11.7s5.6-4.4 5.6-11.7c0-2.5-2.5-4.1-5.6-4.1s-5.6 1.6-5.6 4.1Z',
-          fill: 'none',
-          stroke: 'currentColor',
-          strokeWidth: 1.6,
-          strokeLinejoin: 'round',
-        }),
-        h('circle', { cx: 13.3, cy: 13.4, r: 1.05, fill: 'currentColor' }),
-        h('circle', { cx: 18.7, cy: 13.4, r: 1.05, fill: 'currentColor' }),
-        h('path', {
-          d: 'M16 21v3.4',
-          fill: 'none',
-          stroke: 'currentColor',
-          strokeWidth: 1.6,
-          strokeLinecap: 'round',
-        }),
-      )
+    function UsageIcon() {
+      return h('svg', { className: 'ccu-mark', viewBox: '0 0 24 24', width: 16, height: 16,
+        fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round',
+        strokeLinejoin: 'round', 'aria-hidden': true },
+        h('path', { d: 'M4.8 18a9 9 0 1 1 14.4 0M12 12l3-4' }),
+        h('circle', { cx: 12, cy: 12, r: 1.5 }))
     }
 
     function Meter({ label, windowLimit, now, t, full }) {
@@ -467,11 +441,65 @@ window.__ModuleLoader__.load({
         updatedAt: 0,
       })
       const [now, setNow] = React.useState(() => Date.now())
+      const [updateState, setUpdateState] = React.useState('idle')
       const alive = React.useRef(true)
+      const updateBusy = React.useRef(false)
       const lastLoaded = React.useRef(0)
       const requestId = React.useRef(0)
       const uid = React.useId().replace(/[^a-zA-Z0-9_-]/g, '')
       const detailsId = `ccu-details-${uid || 'menu'}`
+
+      const marketUrl = (path) => new URL(`dsh-market/api/v1/${path}`, document.baseURI).toString()
+      const marketRequest = async (path, options) => {
+        const response = await fetch(marketUrl(path), {
+          credentials: 'same-origin', cache: 'no-store', ...options,
+        })
+        const body = await response.json().catch(() => null)
+        if (!response.ok || body?.schema !== 'dsh-market/update-api/v1') {
+          throw new Error(body?.error || 'Market unavailable')
+        }
+        return body
+      }
+      const checkUpdate = async () => {
+        if (updateBusy.current) return
+        updateBusy.current = true
+        setUpdateState('checking')
+        try {
+          const result = await marketRequest('updates?name=dsh-command-code-usage&force=1')
+          if (!result.package || typeof result.package.updateAvailable !== 'boolean') throw new Error('Invalid update status')
+          if (alive.current) setUpdateState(result.package.source === 'linked' ? 'local' : result.package.source === 'generation' || !result.package.latestVersion ? 'failed' : result.package.updateAvailable ? 'available' : 'current')
+        } catch {
+          if (alive.current) setUpdateState('failed')
+        } finally {
+          updateBusy.current = false
+        }
+      }
+      const installUpdate = async () => {
+        if (updateBusy.current) return
+        updateBusy.current = true
+        setUpdateState('updating')
+        try {
+          const result = await marketRequest('updates', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ packageName: 'dsh-command-code-usage' }),
+          })
+          const id = result.operation?.operationId
+          if (!id) throw new Error('Missing operation id')
+          let operation = result.operation
+          const deadline = Date.now() + 5 * 60 * 1000
+          while (alive.current && ['queued', 'running'].includes(operation.state) && Date.now() < deadline) {
+            await new Promise((resolve) => window.setTimeout(resolve, 2000))
+            if (!alive.current) return
+            operation = (await marketRequest(`operations?operationId=${encodeURIComponent(id)}`)).operation
+            if (!operation) throw new Error('Missing operation')
+          }
+          if (alive.current) setUpdateState(operation.state === 'succeeded' ? 'done' : 'failed')
+        } catch {
+          if (alive.current) setUpdateState('failed')
+        } finally {
+          updateBusy.current = false
+        }
+      }
 
       const load = React.useCallback(async (force) => {
         const request = ++requestId.current
@@ -554,22 +582,6 @@ window.__ModuleLoader__.load({
       // `windowLimits.limited` means the plan has rolling windows at all; only
       // `exceeded` means one of them is actually spent.
       const limitReached = fiveHour?.exceeded === true || weekly?.exceeded === true
-      const worstPercent = Math.max(fiveHour?.percent ?? 0, weekly?.percent ?? 0)
-      const worstTone = limitReached
-        ? 'error'
-        : worstPercent >= 85
-          ? 'error'
-          : worstPercent >= 65
-            ? 'warn'
-            : 'active'
-      const statusTone =
-        state.phase === 'loading'
-          ? undefined
-          : state.phase === 'error'
-            ? 'error'
-            : state.error
-              ? 'warn'
-              : worstTone
       const remaining = data?.credits?.totalRemaining ?? data?.credits?.monthlyRemaining
       const monthlyTotal = data?.credits?.monthlyTotal
       const monthlyPercent = data?.credits?.monthlyPercent
@@ -592,7 +604,6 @@ window.__ModuleLoader__.load({
           : planStatus === 'inactive'
             ? t('widget.inactive')
             : planStatus || (state.phase === 'loading' ? t('widget.loading') : '—')
-      const planChip = planName === t('widget.title') ? null : planName
 
       const toggle = () => setExpanded((value) => !value)
 
@@ -739,14 +750,8 @@ window.__ModuleLoader__.load({
           'button',
           { className: 'ccu-head', type: 'button', role: 'menuitem', onClick: toggle,
             disabled: !interactive, 'aria-expanded': expanded, 'aria-controls': detailsId },
-          h(GoatMark, { size: 18 }),
+          h(UsageIcon),
           h('span', { className: 'ccu-title' }, t('widget.remainingUsage')),
-          planChip ? h('span', { className: 'ccu-plan' }, planChip) : null,
-          h('span', {
-            className: 'ccu-dot',
-            'data-tone': statusTone,
-            title: limitReached ? t('widget.limited') : statusLabel,
-          }),
           h(
             'span',
             {
@@ -811,6 +816,14 @@ window.__ModuleLoader__.load({
           ),
         ),
         details,
+        h('div', { className: 'ccu-actions' },
+          h('button', { type: 'button', className: 'ccu-action', disabled: !interactive || updateState === 'checking' || updateState === 'updating',
+            onClick: updateState === 'available' ? installUpdate : checkUpdate },
+            t(updateState === 'checking' ? 'widget.checkingUpdate' : updateState === 'updating' ? 'widget.updatingPlugin' : updateState === 'available' ? 'widget.updatePlugin' : 'widget.checkUpdate')),
+          updateState !== 'idle' && updateState !== 'checking' && updateState !== 'updating'
+            ? h('span', { className: 'ccu-updated', role: 'status' }, t({ available: 'widget.updateAvailable', current: 'widget.updateCurrent', done: 'widget.updateDone', failed: 'widget.updateFailed', local: 'widget.updateLocal' }[updateState]))
+            : null,
+        ),
         ),
       )
 

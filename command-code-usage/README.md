@@ -13,6 +13,7 @@
 - **月度额度**剩余 / 总量（GOAT 为 70 credits）
 - 额外额度（如有）、续费日期、最近更新时间
 - 手动刷新与打开 Command Code Studio 用量页
+- 检查并安装插件更新（需安装支持更新 API 的 DSH 插件市场）
 - 加载骨架、错误提示、旧数据刷新失败提示
 
 菜单内的用量区默认收起，点击「剩余用量」可展开或收起详情，状态不写入 `localStorage`。小窗口下区域限制高度并可滚动，按钮保留键盘焦点样式。
@@ -40,7 +41,7 @@ https://github.com/zhagtao/dsh-plugin.git#path:/command-code-usage
 github:zhagtao/dsh-plugin#path:/command-code-usage
 ```
 
-在 Harness 左侧 **Plugins** 页面选择安装 bundle，填入上面的地址。安装完成后启用 `Command Code Usage`，刷新页面即可。之后要更新时，在 Plugins 页面重新安装同一地址。
+在 Harness 左侧 **Plugins** 页面选择安装 bundle，填入上面的地址。安装完成后启用 `Command Code Usage`，刷新页面即可。展开用户菜单中的「剩余用量」后，可检查插件更新并在发现新版本时点击更新。此功能依赖支持更新 API 的 DSH 插件市场；不可用时可在 Plugins 页面重新安装同一地址。更新完成后按提示刷新页面或重启 DSH。
 
 ## 从本地目录安装
 
@@ -50,7 +51,7 @@ git clone https://github.com/zhagtao/dsh-plugin.git
 
 然后在 **Plugins** 页面选择本地 bundle，选中 clone 仓库中的 `command-code-usage/` 子目录，而不是仓库根目录。
 
-> 本地安装时由 DSH 的安装器把目录转换为 `link:` 依赖；文档和仓库中不记录任何本机绝对路径。
+> 本地安装时由 DSH 的安装器把目录转换为 `link:` 依赖，需手动更新本地源目录；文档和仓库中不记录任何本机绝对路径。
 
 ## 数据来源
 
@@ -74,7 +75,7 @@ Host 半用 DSH 凭证服务中的 `COMMAND_CODE_API_KEY` 调用 Command Code �
 - Host 到 Command Code 的请求使用 `Authorization: Bearer <key>`，只在服务端发起。
 - 客户端响应仅包含套餐、额度和窗口数字，不含用户邮箱、token 或任何凭证。
 - `cache-control: no-store`，服务端缓存 30 秒；手动刷新带 `?refresh=1` 绕过缓存。
-- 不写入 profile、不安装依赖、无构建脚本。
+- 用量查询不写入 profile；只有用户主动选择更新插件时，插件市场才执行安装操作。插件无构建脚本。
 - 仓库内不包含本机路径、用户名或凭证文件。
 
 ## 开发与验证
