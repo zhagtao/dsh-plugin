@@ -27,6 +27,7 @@ window.__ModuleLoader__.load({
     const LOCALES = {
       en: {
         'widget.title': 'Command Code',
+        'widget.remainingUsage': 'Remaining usage',
         'widget.menuLabel': 'Command Code usage',
         'widget.fiveHour': '5h',
         'widget.weekly': 'Week',
@@ -62,6 +63,7 @@ window.__ModuleLoader__.load({
       },
       zh: {
         'widget.title': 'Command Code',
+        'widget.remainingUsage': '剩余用量',
         'widget.menuLabel': 'Command Code 用量',
         'widget.fiveHour': '5 小时',
         'widget.weekly': '每周',
@@ -100,7 +102,9 @@ window.__ModuleLoader__.load({
     const CSS = `
 .ccu-menu{display:flex;flex-direction:column;box-sizing:border-box;min-width:0;max-width:calc(100vw - 24px);max-height:min(46vh,380px);margin:0 0 4px;padding:9px 10px 8px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;border-bottom:1px solid var(--dsw-alias-separator-primary);color:var(--dsw-alias-label-primary);font-family:inherit;font-size:12px;line-height:1.45;text-align:left}
 .ccu-menu > *{flex:none}
-.ccu-head{display:flex;align-items:center;gap:7px;min-width:0}
+.ccu-head{display:flex;align-items:center;gap:7px;min-width:0;width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.ccu-head:focus-visible{outline:2px solid var(--dsw-alias-label-primary-bluish);outline-offset:2px}
+.ccu-content[hidden]{display:none}
 .ccu-mark{flex:none;display:block;color:var(--dsw-alias-label-primary-bluish)}
 .ccu-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;font-weight:650;letter-spacing:.01em}
 .ccu-plan{min-width:0;max-width:92px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:1px 6px;border:1px solid color-mix(in srgb,var(--dsw-alias-label-primary-bluish) 32%,transparent);border-radius:999px;color:var(--dsw-alias-label-primary-bluish);font-size:10px;font-weight:600;letter-spacing:.02em}
@@ -454,7 +458,7 @@ window.__ModuleLoader__.load({
     }
 
     function UsageMenu({ t, host, interactive }) {
-      const [expanded, setExpanded] = React.useState(true)
+      const [expanded, setExpanded] = React.useState(false)
       const [state, setState] = React.useState({
         phase: 'loading',
         data: null,
@@ -606,12 +610,7 @@ window.__ModuleLoader__.load({
                 { className: 'ccu-error', role: 'status' },
                 t(errorKey || 'widget.errorUpstream'),
               )
-            : h(
-                'div',
-                { className: 'ccu-metrics' },
-                h(Meter, { label: t('widget.fiveHour'), windowLimit: fiveHour, now, t }),
-                h(Meter, { label: t('widget.weekly'), windowLimit: weekly, now, t }),
-              )
+            : null
 
       const summary =
         state.phase === 'ready'
@@ -643,7 +642,7 @@ window.__ModuleLoader__.load({
         state.phase === 'ready'
           ? h(
               'div',
-              { className: 'ccu-details', id: detailsId, hidden: !expanded },
+              { className: 'ccu-details' },
               h(
                 'div',
                 { className: 'ccu-row' },
@@ -737,10 +736,11 @@ window.__ModuleLoader__.load({
           'data-phase': state.phase,
         },
         h(
-          'div',
-          { className: 'ccu-head' },
+          'button',
+          { className: 'ccu-head', type: 'button', role: 'menuitem', onClick: toggle,
+            disabled: !interactive, 'aria-expanded': expanded, 'aria-controls': detailsId },
           h(GoatMark, { size: 18 }),
-          h('span', { className: 'ccu-title' }, t('widget.title')),
+          h('span', { className: 'ccu-title' }, t('widget.remainingUsage')),
           planChip ? h('span', { className: 'ccu-plan' }, planChip) : null,
           h('span', {
             className: 'ccu-dot',
@@ -748,16 +748,10 @@ window.__ModuleLoader__.load({
             title: limitReached ? t('widget.limited') : statusLabel,
           }),
           h(
-            'button',
+            'span',
             {
-              type: 'button',
               className: 'ccu-toggle',
-              onClick: toggle,
-              disabled: !interactive || state.phase !== 'ready',
-              'aria-expanded': expanded,
-              'aria-controls': detailsId,
-              'aria-label': expanded ? t('widget.collapse') : t('widget.expand'),
-              title: expanded ? t('widget.collapse') : t('widget.expand'),
+              'aria-hidden': true,
             },
             h(
               'svg',
@@ -779,6 +773,7 @@ window.__ModuleLoader__.load({
             ),
           ),
         ),
+        h('div', { className: 'ccu-content', id: detailsId, hidden: !expanded },
         metrics,
         summary,
         staleWarning,
@@ -816,6 +811,7 @@ window.__ModuleLoader__.load({
           ),
         ),
         details,
+        ),
       )
 
       return h(

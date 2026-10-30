@@ -5,6 +5,7 @@
   },
   "widget": {
     "title": "Command Code",
+    "remainingUsage": "Remaining usage",
     "menuLabel": "Command Code usage",
     "fiveHour": "5h",
     "weekly": "Week",

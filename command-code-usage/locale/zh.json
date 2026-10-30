@@ -5,6 +5,7 @@
   },
   "widget": {
     "title": "Command Code",
+    "remainingUsage": "剩余用量",
     "menuLabel": "Command Code 用量",
     "fiveHour": "5 小时",
     "weekly": "每周",
