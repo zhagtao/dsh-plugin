@@ -1,9 +1,11 @@
 {
   "meta": {
     "title": "Command Code Usage",
-    "description": "Shows GOAT plan credits and rolling 5-hour and weekly usage in the bottom-right corner."
+    "description": "Shows Command Code plan credits and rolling 5-hour and weekly usage in the account menu."
   },
   "widget": {
+    "title": "Command Code",
+    "menuLabel": "Command Code usage",
     "fiveHour": "5h",
     "weekly": "Week",
     "plan": "Plan",
@@ -18,10 +20,12 @@
     "resetsIn": "resets in {time}",
     "resetting": "resetting now",
     "retry": "Retry",
-    "refresh": "Refresh usage",
-    "openStudio": "Open Studio",
-    "collapse": "Collapse usage card",
-    "expand": "Expand usage card",
+    "refresh": "Refresh",
+    "refreshing": "Refreshing…",
+    "openStudio": "Studio",
+    "openStudioTitle": "Open Command Code Studio",
+    "collapse": "Collapse usage details",
+    "expand": "Expand usage details",
     "limited": "Limit reached",
     "active": "active",
     "inactive": "inactive",

@@ -6,7 +6,7 @@ DeepSeek Harness（DSH）插件集合。仓库根目录只放集合级文件；�
 
 | 插件 | 说明 |
 |---|---|
-| [command-code-usage](command-code-usage/README.md) | 在窗口右下角显示 Command Code GOAT 套餐的额度、5 小时与每周滚动限额。 |
+| [command-code-usage](command-code-usage/README.md) | 在左下角账号菜单中显示 Command Code 套餐的额度、5 小时与每周滚动限额。 |
 
 ## 从 GitHub 安装
 

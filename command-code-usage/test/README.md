@@ -15,17 +15,20 @@ node test/usage.test.mjs
 
 ## Client 渲染
 
-`client.js` 是 `window.__ModuleLoader__` 工厂。可以用 jsdom + React 做挂载验证：
+`client.js` 是 `window.__ModuleLoader__` 工厂，注册一个无可见内容的 `shell.overlay` 组件，再把用量区 portal 到已打开的账号菜单。可以用 jsdom + React 做挂载验证：
 
 ```bash
 npm install react@19.3.0 react-dom@19.3.0 jsdom@30
 ```
 
-然后构造一个 `t` 函数、桩 `ctx.slots` 和桩 `fetch`，断言：
+先向 jsdom 的 `<body>` 放入一个 `[role="menu"]`，其中包含 `Settings` 与 `Feedback` 两个 `button[role="menuitem"]`，再构造 `t`、桩 `ctx.slots` 和桩 `fetch`，断言：
 
-- 收起态显示 `GOAT`、5 小时/每周百分比、剩余额度；
-- 点击 header 后出现 `.ccu-details`；
+- 菜单内出现 `.ccu-menu`，显示套餐、5 小时/每周百分比和剩余额度；
+- 默认展开 `.ccu-details`，点击 `.ccu-toggle` 后 `hidden` 生效；
 - 点击刷新时请求带 `?refresh=1`；
-- 组件卸载时清理 interval 和事件监听。
+- 关闭菜单（移除 `[role="menu"]`）后 host 被移除；
+- 组件卸载时清理 interval、`MutationObserver` 和事件监听。
+
+测试中不需要再构造右下角悬浮卡片，也没有 `localStorage` 展开状态需要清理。
 
 开发时也可以启动一个临时 profile：把本目录 `link:` 进临时 profile 的依赖与 `dsh.profile.bundles`，不触碰当前 profile。

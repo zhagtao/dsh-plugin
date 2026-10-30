@@ -1,9 +1,11 @@
 {
   "meta": {
     "title": "Command Code 套餐用量",
-    "description": "在右下角显示 Command Code GOAT 套餐的额度、5 小时与每周滚动限额。"
+    "description": "在左下角账号菜单中显示 Command Code 套餐的额度、5 小时与每周滚动限额。"
   },
   "widget": {
+    "title": "Command Code",
+    "menuLabel": "Command Code 用量",
     "fiveHour": "5 小时",
     "weekly": "每周",
     "plan": "套餐",
@@ -18,10 +20,12 @@
     "resetsIn": "{time} 后重置",
     "resetting": "正在重置",
     "retry": "重试",
-    "refresh": "刷新用量",
-    "openStudio": "打开 Studio",
-    "collapse": "收起用量卡片",
-    "expand": "展开用量卡片",
+    "refresh": "刷新",
+    "refreshing": "刷新中…",
+    "openStudio": "Studio",
+    "openStudioTitle": "打开 Command Code Studio",
+    "collapse": "收起用量详情",
+    "expand": "展开用量详情",
     "limited": "已达限额",
     "active": "生效中",
     "inactive": "未生效",

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Command Code GOAT usage card for DeepSeek Harness (DSH).",
+  "description": "Command Code plan usage in the DeepSeek Harness (DSH) account menu.",
   "keywords": [
     "dsh",
     "deepseek-harness",

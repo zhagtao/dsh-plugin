@@ -1,6 +1,6 @@
 # Command Code 套餐用量
 
-一个 DeepSeek Harness（DSH）bundle，在窗口右下角显示 **Command Code GOAT 套餐**的实时用量。悬浮卡片默认收起，点击展开详情。
+一个 DeepSeek Harness（DSH）bundle，把 **Command Code 套餐**的实时用量放进左下角用户头像打开的账号菜单。打开菜单即可看到 5 小时与每周百分比，详情默认展开，也可以折叠；不再有常驻右下角的悬浮卡片。
 
 ![GOAT icon](icon.svg)
 
@@ -8,14 +8,23 @@
 
 ## 显示内容
 
-- **GOAT 套餐**与订阅状态
+- **套餐**与订阅状态
+- **5 小时 / 每周滚动限额**：百分比进度条，详情中还有已用 / 上限与重置倒计时
 - **月度额度**剩余 / 总量（GOAT 为 70 credits）
-- **5 小时滚动限额**：已用 / 上限、百分比、重置倒计时
-- **每周滚动限额**：已用 / 上限、百分比、重置倒计时
 - 额外额度（如有）、续费日期、最近更新时间
 - 手动刷新与打开 Command Code Studio 用量页
+- 加载骨架、错误提示、旧数据刷新失败提示
 
-卡片渲染在 `shell.overlay` 中，使用绝对定位贴住右下角；它不替换应用根节点，也不读取其他插件的 DOM。
+菜单内的用量区默认展开详情；右上角按钮可以收起或展开，状态只在当前页面会话中保留，不再写入 `localStorage`。小窗口下区域限制高度并可滚动，按钮保留键盘焦点样式。
+
+## 挂载方式
+
+DSH 的账号菜单是 `settings.launcher` 单占位组件，没有菜单项级别的插件插槽。因此 `client.js` 仍注册一个无可见内容的 `shell.overlay` 组件来获得 React 生命周期，但不渲染悬浮卡片：
+
+- 通过菜单项结构（`Settings` 与 `Feedback` / 登录或退出动作）识别打开的账号菜单；文本变化时再用 `Account menu` 触发器位置兜底。确认后向菜单项区域挂载一个由本插件拥有的 host 节点。
+- 用 React portal 渲染用量区，不修改、不替换「设置 / 意见反馈 / 退出登录」等原有菜单项和事件。
+- 用 `MutationObserver` 处理菜单打开、重建、关闭；插件卸载时断开监听并移除 host。
+- 菜单关闭或页面切换后不会留下浮层，也不会遮挡输入框。
 
 ## 从 GitHub 安装
 
@@ -58,7 +67,7 @@ Host 半用 DSH 凭证服务中的 `COMMAND_CODE_API_KEY` 调用 Command Code �
 
 无需配置。凭证名称固定为 `COMMAND_CODE_API_KEY`，与 `command-code` provider 使用的键一致；它可以在「设置 → 模型」中保存，也可以通过启动环境变量提供。
 
-如果 Key 未配置，卡片会显示「请先在设置 → 模型中配置 COMMAND_CODE_API_KEY」，并提供重试按钮。
+如果 Key 未配置，账号菜单的用量区会显示「请先在设置 → 模型中配置 COMMAND_CODE_API_KEY」，并提供重试按钮。
 
 ## 安全与隐私
 
@@ -87,7 +96,7 @@ node test/usage.test.mjs
 dsh-plugin/
 └─ command-code-usage/
    ├─ index.js            # Host：凭证解析、Command Code 请求、/api 路由
-   ├─ client.js           # Client：shell.overlay 卡片、轮询、locale
+   ├─ client.js           # Client：无头 shell.overlay 宿主、账号菜单 portal、轮询、locale
    ├─ cordis.patch.yml    # 插入 command-code-usage Host 行
    ├─ package.json        # bundle + dsh.client 清单
    ├─ locale/{en,zh}.json # Plugin Manager 标题/描述
